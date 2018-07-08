@@ -13,8 +13,12 @@ public class SymbolTable {
         return symbolTable.containsKey(key);
     }
 
-    public Integer getValue(String key){
-        return symbolTable.get(key);
+    public String getValue(String key){
+        return Integer.toString(symbolTable.get(key));
+    }
+
+    public void putValue(String key, int memory){
+        symbolTable.put(key, memory);
     }
 
     public void firstPass(List<String> lines){
@@ -29,8 +33,9 @@ public class SymbolTable {
                 line = line.replace("(","");
                 line = line.replace(")","");
                 symbolTable.put(line, lineCount);
+            } else {
+                lineCount++;
             }
-            lineCount++;
         }
     }
 

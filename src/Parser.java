@@ -9,14 +9,21 @@ public class Parser {
     }
 
     public void parse(String line){
+//        check for inline comment
+        if (line.contains("//")){
+            String[] splitOnInlineComment = line.split("//");
+            line = splitOnInlineComment[0].trim();
+
+        }
+//        check for jump instruction
         if (line.contains(";")){
             String[] splitOnSemi = line.split(";");
             jmp = splitOnSemi[1];
-            String[] splitOnEquals = splitOnSemi[0].split("=");
-            dest = splitOnEquals[0];
-            comp = splitOnEquals[1];
-        } else {
+            dest = "null";
+            comp = splitOnSemi[0];
+        } else if(line.contains("=")) {
             String[] splitOnEquals = line.split("=");
+//            System.out.println(splitOnEquals[0]);
             dest = splitOnEquals[0];
             comp = splitOnEquals[1];
         }
