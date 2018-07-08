@@ -6,6 +6,14 @@ public class Assemble {
     public static HashMap<String, String> compTable;
     public static HashMap<String, String> jumpTable;
 
+    public int memory = 16;
+    public SymbolTable symbolTable;
+
+
+    public Assemble(SymbolTable symbolTable){
+        this.symbolTable = symbolTable;
+    }
+
     static{
         destTable = new HashMap<String, String>();
         compTable = new HashMap<String, String>();
@@ -57,9 +65,30 @@ public class Assemble {
         jumpTable.put("JNE", "101");
         jumpTable.put("JLE", "110");
         jumpTable.put("JMP", "111");
+
+//        symbolTable.put("SP",0);symbolTable.put("LCL",1);symbolTable.put("ARG",2);symbolTable.put("THIS",3);
+//        symbolTable.put("THAT",4);symbolTable.put("R0",0);symbolTable.put("R1",1);symbolTable.put("R2",2);
+//        symbolTable.put("R3",3);symbolTable.put("R4",4);symbolTable.put("R5",5);symbolTable.put("R6",6);
+//        symbolTable.put("R7",7);symbolTable.put("R8",8);symbolTable.put("R9",9);symbolTable.put("R10",10);
+//        symbolTable.put("R11",11);symbolTable.put("R12",12);symbolTable.put("R13",13);symbolTable.put("R14",14);
+//        symbolTable.put("R15",15);symbolTable.put("SCREEN",16384);symbolTable.put("KBD",24576);
     }
 
     public String assembleAInstruction(String aInstruction){
+
+        //        line = line.trim();
+//        if (line.startsWith("@")) {
+//            List<String> split = Arrays.asList(line.split("@"));
+//            if (symbolTable.containsKey(split.get(1))){
+//                System.out.println(symbolTable.get(split.get(1)));
+//            }
+//        }
+
+//        second pass, keep track of memory, start at  16
+//         if see @ string, check if string is in symbol table.  if not add it with next avaiable memory location. memory++
+//        if in table replace with that value
+
+
         String binary = getBinary(aInstruction.split("@")[1]);
         String formattedInstruction = formatBinary(binary);
         return formattedInstruction;
